@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en" ng-app="RDash">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Executive Dashboard</title>
+  <!-- STYLES -->
+  <!-- build:css lib/css/main.min.css -->
+  <link rel="stylesheet" type="text/css" href="components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="components/rdash-ui/dist/css/rdash.min.css">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+
+  <!-- endbuild -->
+  <!-- SCRIPTS -->
+
+  <!-- jQuery Library -->
+  <script type="text/javascript" src="components/jquery/dist/jquery.min.js"></script>
+
+  <!-- jPlayer Library -->
+  <script type="text/javascript" src="components/jplayer/dist/jplayer/jquery.jplayer.min.js"></script>
+
+  <!-- JWPlayer Library -->
+  <script type="text/javascript" src="components/jwplayer-mirror/jwplayer.js"></script>
+
+  <!-- build:js lib/js/main.min.js -->
+  <script type="text/javascript" src="components/angular/angular.min.js"></script>
+  <script type="text/javascript" src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <script type="text/javascript" src="components/angular-cookies/angular-cookies.min.js"></script>
+  <script type="text/javascript" src="components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script type="text/javascript" src="components/angular-sanitize/angular-sanitize.min.js"></script>
+
+  <script type="text/javascript" src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+
+  <!-- endbuild -->
+  <!-- Custom Scripts -->
+    <!--
+  <script type="text/javascript" src="js/dashboard.min.js"></script>
+  -->
+
+    <script type="text/javascript" src="js/module.js"></script>
+    <script type="text/javascript" src="js/routes.js"></script>
+    <script type="text/javascript" src="js/services/mappings.js"></script>
+    <script type="text/javascript" src="js/services/query.js"></script>
+    <script type="text/javascript" src="js/controllers/alert-ctrl.js"></script>
+    <script type="text/javascript" src="js/controllers/master-ctrl.js"></script>
+    <script type="text/javascript" src="js/directives/loading.js"></script>
+    <script type="text/javascript" src="js/directives/widget.js"></script>
+    <script type="text/javascript" src="js/directives/widget-body.js"></script>
+    <script type="text/javascript" src="js/directives/widget-header.js"></script>
+    <script type="text/javascript" src="js/directives/widget-footer.js"></script>
+    <script type="text/javascript" src="js/directives/jplayer.js"></script>
+    <script type="text/javascript" src="js/directives/angular-jwplayer.js"></script>
+    <script type="text/javascript" src="js/directives/social-media.js"></script>
+    <script type="text/javascript" src="js/filters/filters.js"></script>
+
+    <script>
+        $(function () {
+
+            $('.languages-dropdown').on('click', function(event) {
+                event.stopPropagation();
+            });
+
+            $('.content-table').on('click', function(event) {
+                event.stopPropagation();
+            });
+
+            // adjust left position of pop-out so the jiggle effect doesn't happen
+            // from the border-left on the selected entity
+            $(".dropdown").hover(function(){
+                $(this).children()[1].style.left = '247px';
+             //   $(this).children()[1].style.paddingLeft = '3px';
+            },function(){
+                $(this).children()[1].style.left = '250px';
+            //    $(this).children()[1].style.paddingLeft = '0px';
+            });
+
+        });
+
+
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '404138029757203',
+                xfbml      : true,
+                version    : 'v2.2'
+            });
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+
+
+
+</head>
+<body ng-controller="MasterCtrl">
+  <div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak>
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <ul class="sidebar">
+        <li class="sidebar-main">
+          <a ng-click="toggleSidebar()">
+              <img src="img/oddi-logo.png" width="160"/>
+            <span class="menu-icon glyphicon glyphicon-transfer" tooltip="Toggle Menu"></span>
+          </a>
+        </li>
+        <li class="sidebar-title"><span>NAVIGATION</span></li>
+        <li><p class="instructions">Please select filters then click "Add Column".</p></li>
+        <li class="sidebar-list">
+            <form id="filters" style="margin-top: 180px">
+
+                <div>
+                    <button type="button" class="btn btn-primary add-column-btn" ng-click="addColumn()">Add Column</button>
+                </div>
+                <!-- Search Dropdown -->
+
+                <input type="text" style="margin-left: 20px; width: 160px;" class="form-control" id="keywords" ng-model="keywords" placeholder="Keywords">
+
+
+
+
+
+            </form>
+
+        </li>
+
+      </ul>
+
+        <form id="column-filters">
+            <ul style="margin-top: 140px; list-style: none; padding: 0px">
+                <li class="new-dropdown-list">
+                    <div class="item dropdown side-dropdown open">
+                        <a class="dropdown-toggle" href="#" aria-haspopup="true" aria-expanded="true">
+                            <span>Countries</span>
+                        </a>
+
+                        <div class="dropdown-menu content-table menu-large">
+                            <div class="list_container">
+                                <div class="list_item dropdown-header" ng-repeat="country in countries">
+                                    <input class="selected-item" type="checkbox" value="{{ country.code }}" ng-click="selectCountry($index)" /><span style="margin-left: 5px">{{ country.name }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="new-dropdown-list">
+                    <div class="item dropdown side-dropdown open">
+                        <a class="dropdown-toggle" href="#" aria-haspopup="true" aria-expanded="true">
+                            <span>Languages</span>
+                        </a>
+
+                        <div class="dropdown-menu content-table menu-large">
+                            <div class="list_container">
+                                <div class="list_item dropdown-header" ng-repeat="language in languages">
+                                    <input type="checkbox" name="language" value="{{ language.lang_code }}" ng-click="selectLanguage($index)" /><span style="margin-left: 5px">{{ language.name }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="new-dropdown-list">
+                    <div class="item dropdown side-dropdown open">
+                        <a class="dropdown-toggle" href="#" aria-haspopup="true" aria-expanded="true">
+                            <span>Networks</span>
+                        </a>
+
+                        <div class="dropdown-menu content-table">
+                            <div>
+                                <div class="list_item dropdown-header" ng-repeat="network in networks">
+                                    <input type="checkbox" name="network" value="{{ network.name }}" ng-click="selectNetwork($index)" /><span style="margin-left: 5px">{{ network.name }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="new-dropdown-list">
+                    <div class="item dropdown side-dropdown open">
+                        <a class="dropdown-toggle" href="#" aria-haspopup="true" aria-expanded="true">
+                            <span>Organizations</span>
+                        </a>
+
+
+                        <div class="dropdown-menu content-table">
+                            <div>
+                                <div class="list_item dropdown-header" ng-repeat="organization in organizations">
+                                    <input type="checkbox" name="organization" value="{{ organization.name }}" ng-click="selectOrganization($index)" /><span style="margin-left: 5px">{{ organization.name }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="new-dropdown-list">
+                    <div class="item dropdown side-dropdown open">
+                        <a class="dropdown-toggle" href="#" aria-haspopup="true" aria-expanded="true">
+                            <span>Favorites</span>
+                        </a>
+
+                        <div class="dropdown-menu content-table" style="max-height: 200px; overflow: scroll;">
+                            <div>
+                                <div class="list_item dropdown-header" ng-click="selectHistoryItem($index)" ng-repeat="favorite in favorites">
+                                    <a href="#" class="recent-searches">
+                                        <ul class="recent-search-list">
+                                            <li ng-show="favorite.countries">Countries: {{ favorite.countries | stringifyFilters }}</li>
+                                            <li ng-show="favorite.languages">Languages: {{ favorite.languages | stringifyFilters  }}</li>
+                                            <li ng-show="favorite.networks">Networks: {{ favorite.networks | stringifyFilters  }}</li>
+                                            <li ng-show="favorite.organizations">Organizations: {{ favorite.organizations | stringifyFilters  }}</li>
+                                            <li ng-show="favorite.keywords">Keywords: {{ favorite.keywords  }}</li>
+                                        </ul>
+                                    </a>
+                                </div>
+
+                            </div>
+                            <span ng-show="favorites.length === 0" class="no-favorites">No favorites found.</span>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </form>
+    </div>
+    <!-- End Sidebar -->
+
+    <div id="content-wrapper">
+      <div class="page-content">
+
+        <!-- Header Bar -->
+        <div class="row header">
+          <div class="col-xs-12">
+            <div class="user pull-right">
+
+            </div>
+            <div class="meta">
+              <div class="page">
+                CXP Executive Dashboard <!-- Dashboard -->
+              </div>
+                <!--
+              <div class="breadcrumb-links">
+                Home / Dashboard
+              </div>
+              -->
+            </div>
+          </div>
+        </div>
+        <!-- End Header Bar -->
+
+        <!-- Main Content -->
+        <div ui-view></div>
+
+      </div><!-- End Page Content -->
+    </div><!-- End Content Wrapper -->
+  </div><!-- End Page Wrapper -->
+</body>
+</html>

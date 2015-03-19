@@ -1,0 +1,282 @@
+<!--
+<div class="row alerts-container" data-ng-hide="hasFilters">
+    <div class="col-xs-12">
+        <alert>Please select filters on the left then click "Add Column".</alert>
+    </div>
+</div>
+-->
+
+<div id="myAlert" class="alert success fade {{ alertDisplay }} added-to-favorites" data-alert="alert">Added to favorites!</div>
+
+<div class="row alerts-container">
+    <div class="col-xs-12">
+    <div class="alert alert-success" role="alert" ng-show="hasFilters === true">
+            <div ng-if="selectedCountries.length > 0">
+                <span>Countries: </span>
+                <span ng-repeat="country in selectedCountries">
+                    <span> {{ country.name }}<span ng-if="$last === false">, </span></span>
+                </span>
+            </div>
+            <div ng-if="selectedLanguages.length > 0">
+                <span>Languages: </span>
+                <span ng-repeat="language in selectedLanguages">
+                    <span> {{ language.name }}<span ng-if="$last === false">, </span></span>
+                </span>
+            </div>
+            <div ng-if="selectedNetworks.length > 0">
+                <span>Networks: </span>
+                <span ng-repeat="network in selectedNetworks">
+                    <span> {{ network.name }}<span ng-if="$last === false">, </span></span>
+                </span>
+            </div>
+            <div ng-if="selectedOrganizations.length > 0">
+                <span>Organizations: </span>
+                <span ng-repeat="organization in selectedOrganizations">
+                    <span> {{ organization.name }}<span ng-if="$last === false">, </span></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row alerts-container no-results-found" data-ng-show="noResultsFound">
+    <div class="col-xs-12">
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            No results found.
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal for Media Content -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 675px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" ng-click="closeModal()">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Media</h4>
+            </div>
+            <div class="modal-body">
+                <img ng-src="{{ image }}" alt="image" width="640" ng-if="isAudio" />
+                <!--
+                <video vg-src="sources" preload='metadata' controls style="width: 640px" ng-if="isVideo"></video>
+                -->
+                <jwplayer player-id="myplayer" setup="options" ng-if="isVideo"></jwplayer>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                        <!-- Horizontal Column Scroll -->
+<div class="row" style="display: inline-flex; overflow: auto; width: 100%;">
+
+    <!-- Columns -->
+    <div class="col-lg-4 col-md-4 col-xs-12" ng-repeat="col in column track by $index" id="column-{{$index}}" style="min-width: 285px" ng-init="columnIndex = $index">
+      <!--  <p class="remove-column"><i tooltip="Delete" class="fa fa-times close-button" ng-click="removeColumn($index)"></i></p> -->
+        <div class="item dropdown column-dropdown open">
+            <a class="dropdown-toggle" href="#" aria-haspopup="true" aria-expanded="true">
+                <i class="fa fa-bars"></i>
+            </a>
+
+
+            <div class="dropdown-menu column-dropdown-content">
+                <div>
+                    <div class="list_item dropdown-header">
+                        <a class="column-option" ng-style="{display: !$first && 'block' || 'none'}" ng-click="moveLeft($index)"><p><i class="fa fa-caret-square-o-left move-column-left"></i>Move Left</p></a>
+                        <a class="column-option" ng-style="{display: !$last && 'block' || 'none'}" ng-click="moveRight($index)"><p><i class="fa fa-caret-square-o-right move-column-right"></i>Move Right</p></a>
+                        <a class="column-option" ng-click="favoriteColumn($index)"><p><i class="fa fa-star favorites-button"></i>Favorite</p></a>
+                        <a class="column-option" ng-click="removeColumn($index)"><p><i class="fa fa-times close-button"></i>Delete</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+        <div class="move-controls" ng-style="{visibility: column.length > 1 && 'visible' || 'hidden'}">
+            <span tooltip="Move Left" class="move-left" ng-style="{visibility: !$first && 'visible' || 'hidden'}" ng-click="moveLeft($index)"><i class="fa fa-caret-square-o-left"></i></span>
+            <span tooltip="Move Right" class="move-right" ng-style="{visibility: !$last && 'visible' || 'hidden'}" ng-click="moveRight($index)"><i class="fa fa-caret-square-o-right"></i></span>
+        </div>
+        -->
+        <div class="widget-heading">
+            <p class="widget-heading-text"><strong>Filters:</strong> {{ col.filters }}</p>
+        </div>
+        <rd-widget>
+            <rd-widget-body data-height="{{ height }}">
+                <rd-loading ng-show="loading[$index]"></rd-loading>
+
+                <div ng-repeat="item in col">
+                    <div>
+                        <span class="badge">{{ item.network.name }}</span>
+                        <span class="pub-date">{{ item.pub_date | limitTo: 10 }}</span>
+                    </div>
+                    <div id="box" ng-repeat="image in item._embedded.images | limitTo:1" ng-if="image.url" style="background: url('{{ image.url }}') repeat scroll 0 0 / cover  rgba(0, 0, 0, 0)">
+
+                        <div id="overlay">
+
+                            <div class="image-box" ng-class="item._embedded.videos[0] ? '' : 'full-width'">
+                                <div>
+                                    <a target="_blank" class="media-link" ng-click="setImage(image.url)" data-toggle="modal" data-target="#myModal">
+                                        <div class="sidebar-link"><p>Image</p><p class="fa fa-image"></p></div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="video-box" ng-if="item._embedded.videos[0]">
+                                <div>
+                                    <a target="_blank" class="media-link" ng-click="setVideo(item._embedded.videos[0].url)" data-toggle="modal" data-target="#myModal">
+                                        <div class="sidebar-link"><p>Video</p><p class="fa fa-video-camera"></p></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <p>
+                        <a target="_blank" href="{{ item.object_name }}"><strong ng-if="item.translated">{{ item._embedded.translated[0].translated_title }}</strong></a>
+                        <a target="_blank" href="{{ item.object_name }}"><strong ng-if="!item.translated">{{ item.title }}</strong></a>
+                    </p>
+                    <div ng-if="!item.translated" class="article-description" ng-bind-html="item.description"></div>
+                    <div ng-if="item.translated" class="article-description" ng-bind-html="item._embedded.translated[0].translated_description"></div>
+                    <p style="font-size: 10px;" ng-repeat="audio in item._embedded.audios">
+                        <div class="well inline-play glyphicon glyphicon-play" id="jplayer-{{columnIndex}}-{{$index}}" ng-if="item._embedded.audios" data-audio="{{ item._embedded.audios[0] }}" data-autoplay="false" data-pauseothers="true" jplayer></div>
+                        <div class="player-meta" ng-if="item._embedded.audios">
+                            <span id="time-{{columnIndex}}-{{$index}}" class="time">0:00 /</span>
+                            <span id="duration-{{columnIndex}}-{{$index}}" class="duration">0:00</span>
+                        </div>
+                    </p>
+
+                    <p ng-style="{visibility: item._embedded.translated && 'visible' || 'hidden'}">
+                        <p class="label label-primary translate-button" ng-click="translate(columnIndex, $index)">Translate</p>
+                    </p>
+
+
+                    <div class="social-media-buttons">
+
+                        <a fb-share class="share-buttons">
+                            <i class="fa fa-facebook-square share-song-fb"></i>
+                        </a>
+
+                        <a href="http://twitter.com/share?url={{ item.object_name }}&text={{ item.title }}" target="_blank" class="share-buttons">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+
+                        <a href="https://plus.google.com/share?url={{ item.object_name }}" target="_blank" class="share-buttons">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+
+                        <a href="mailto: your@email.com?subject={{ item.title }}&body={{ item.object_name }}" class="share-buttons">
+                            <i class="fa fa-envelope-o"></i>
+                        </a>
+
+                    </div>
+
+
+                    <hr>
+                </div>
+            </rd-widget-body>
+        </rd-widget>
+    </div>
+
+
+
+    <!--
+	<div class="col-lg-3 col-md-6 col-xs-12">
+		<rd-widget>
+			<rd-widget-body>
+				<div class="widget-icon blue pull-left">
+					<i class="fa fa-support"></i>
+				</div>
+				<div class="title">62</div>
+				<div class="comment">Tickets</div>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+	-->
+</div>
+<!--
+<div class="row">
+	<div class="col-lg-6">
+		<rd-widget>
+      		<rd-widget-header icon="fa-tasks" title="Servers">
+				<a href="#">Manage</a>
+      		</rd-widget-header>
+      		<rd-widget-body classes="medium no-padding">
+				<div class="table-responsive">
+					<table class="table">
+						<tbody>
+							<tr><td>RDVMPC001</td><td>238.103.133.37</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
+							<tr><td>RDVMPC002</td><td>68.66.63.170</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
+							<tr><td>RDVMPC003</td><td>76.117.212.33</td><td><span tooltip="Server Down!" class="text-danger"><i class="fa fa-warning"></i></span></td></tr>
+							<tr><td>RDPHPC001</td><td>91.88.224.5</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
+							<tr><td>RDESX001</td><td>197.188.15.93</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
+							<tr><td>RDESX002</td><td>168.85.154.251</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
+							<tr><td>RDESX003</td><td>209.25.191.61</td><td><span tooltip="Server Down!" class="text-danger"><i class="fa fa-warning"></i></span></td></tr>
+							<tr><td>RDESX004</td><td>252.37.192.235</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
+							<tr><td>RDTerminal01</td><td>139.71.18.207</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
+							<tr><td>RDTerminal02</td><td>136.80.122.212</td><td><span tooltip="Could not connect!" class="text-warning"><i class="fa fa-flash"></i></span></td></tr>
+							<tr><td>RDDomainCont01</td><td>196.80.245.33</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
+						</tbody>
+					</table>
+				</div>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+	<div class="col-lg-6">
+		<rd-widget>
+			<rd-widget-header icon="fa-users" title="Users">
+				<input type="text" placeholder="Search" class="form-control input-sm" />
+			</rd-widget-header>
+			<rd-widget-body classes="medium no-padding">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr><th class="text-center">ID</th><th>Username</th><th>Role</th><th>Account</th></tr>
+						</thead>
+						<tbody>
+							<tr><td class="text-center">1</td><td>Joe Bloggs</td><td>Super Admin</td><td>AZ23045</td></tr>
+							<tr><td class="text-center">2</td><td>Timothy Hernandez</td><td>Admin</td><td>AU24783</td></tr>
+							<tr><td class="text-center">3</td><td>Joe Bickham</td><td>User</td><td>AM23781</td></tr>
+						</tbody>
+					</table>
+        		</div>
+			</rd-widget-body>
+		<rd-widget>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-6">
+   		<rd-widget>
+   			<rd-widget-header icon="fa-plus" title="Extras">
+   				<button class="btn btn-sm btn-info">Button</button>
+   			</rd-widget-header>
+   			<rd-widget-body>
+				<div class="message">
+					This is a standard message which will also work the ".no-padding" class, I can also <span class="error">be an error message!</span>
+				</div>
+				<hr />
+				<div class="message">
+					<a href="http://angular-ui.github.io/bootstrap/" target="_blank">UI Bootstrap</a> is included, so you can use <a href="#" tooltip="I'm a tooltip!">tooltips</a> and all of the other native Bootstrap JS components!
+				</div>
+   			</rd-widget-body>
+   		</rd-widget>
+	</div>
+	<div class="col-lg-6">
+		<rd-widget>
+			<rd-widget-header icon="fa-cog fa-spin" title="Loading Directive">
+				<a href="http://tobiasahlin.com/spinkit/" target="_blank">SpinKit</a>
+			</rd-widget-header>
+			<rd-widget-body>
+				<rd-loading></rd-loading>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+</div>
+-->
