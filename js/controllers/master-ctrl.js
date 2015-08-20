@@ -12,6 +12,13 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
      */
     var mobileView = 992;
 
+	// 5 minute refresh interval
+	var refreshInterval = 300000;
+
+	// this map is used to keep track of all the columns that have been created which is used for refreshing
+	// the data
+	var historyMap = {};
+
 	$scope.processFavorite = function () {
 		var favorites = localStorage.getItem('Executive Dashboard').split('~');
 		for (var i = 0; i < favorites.length; i++) {
@@ -217,6 +224,20 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 				};
 
 
+				$scope.currentColumnNum = $scope.columnNum;
+
+				var currentColumnFilters = {
+					countries: $scope.selectedCountries,
+					languages: $scope.selectedLanguages,
+					networks: $scope.selectedNetworks,
+					organizations: $scope.selectedOrganizations,
+					filters: filters,
+					columnNum: $scope.columnNum
+				};
+
+				// set the data for the historyMap
+				historyMap[$scope.columnNum] = currentColumnFilters;
+
 
 				if ($scope.column[$scope.columnNum].length === 0) {
 					$scope.noResultsFound = true;
@@ -225,6 +246,15 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 					$scope.noResultsFound = null;
 					$scope.columnNum++;
 				}
+
+
+
+
+				// set history
+				$scope.currentColumnCountries = $scope.selectedCountries;
+				$scope.currentColumnLanguages = $scope.selectedLanguages;
+				$scope.currentColumnNetworks = $scope.selectedNetworks;
+				$scope.currentColumnOrganizations = $scope.selectedOrganizations;
 
 
 				// collapse all the menus
@@ -242,14 +272,9 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 				$scope.keywords = '';
 
 
-
-
-
 				// reset form
 				//document.getElementById('filters').reset();
 				document.getElementById('column-filters').reset();
-
-
 
 		});
 
@@ -318,6 +343,19 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 	// Delete column
 	$scope.removeColumn = function (index) {
 		$scope.column.splice(index, 1);
+
+		// if you're deleting one that's in the middle of two columns
+		if (historyMap[index + 1]) {
+			// shift the one next to it into the current position
+			historyMap[index] = historyMap[index + 1];
+
+			// then delete the one next to it
+			delete historyMap[index + 1];
+
+		// otherwise just delete the current one if one next to it doesn't exist
+		} else {
+			delete historyMap[index];
+		}
 		$scope.columnNum--;
 	};
 
@@ -390,6 +428,13 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 			$scope.column[index] = oldColumn;
 
 		}
+
+		// make changes to historyMap
+		var currentColumn = historyMap[index];
+		var nextColumn = historyMap[index + 1];
+		historyMap[index + 1] = currentColumn;
+		historyMap[index] = nextColumn;
+
 	};
 
 	// Moves a column to the left
@@ -402,6 +447,13 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 			$scope.column[newIndex] = $scope.column[index];
 			$scope.column[index] = oldColumn;
 		}
+
+		// make changes to historyMap
+		var currentColumn = historyMap[index];
+		var prevColumn = historyMap[index - 1];
+		historyMap[index - 1] = currentColumn;
+		historyMap[index] = prevColumn;
+
 	};
 
 	$scope.translate = function (parentIndex, index) {
@@ -410,6 +462,41 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 		} else {
 			$scope.column[parentIndex][index].translated = null;
 		}
+	};
+
+	// this function checks for new data based on the interval specified at the top of the file
+	setInterval(function () {
+		if (Object.keys(historyMap).length > 0) {
+			var currentCol = 0;
+
+			$scope.refreshData(currentCol);
+
+
+		}
+	}, refreshInterval);
+
+
+
+	// this function is called to make a call to the factory to return an AJAX JSON response
+	// and update the column it's supposed to
+	$scope.refreshData = function (columnNum) {
+
+		Query.getData(historyMap[columnNum].networks, historyMap[columnNum].organizations, historyMap[columnNum].countries,
+			historyMap[columnNum].languages, $scope.keywords)
+			.then(function (response) {
+
+			//	response.contents[0].title = 'test title : ' + Math.random();
+
+				$scope.column[columnNum] = response.contents;
+				$scope.column[columnNum].filters = historyMap[columnNum].filters;
+
+				columnNum++;
+
+				// if there's more, call the function again with new columnNum
+				if (historyMap[columnNum]) {
+					$scope.refreshData(columnNum);
+				}
+			});
 	};
 
 	/*********************/
