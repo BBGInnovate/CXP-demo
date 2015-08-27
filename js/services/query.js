@@ -11,7 +11,7 @@ angular.module('RDash')
 function Query($http) {
 //	var API_KEY = 'GeMcYM6rB4z6xnuYyVTSKCo2wM8VeP5ViwRtydWE';
 	var data = {
-		getData: function(networks, organization, countries, languages, keywords) {
+		getData: function(networks, organization, countries, languages, keywords, contentFilter) {
 			var API_KEY = 'rIFMx4sUh7USYmdCtvlqmuMGAWq1Qfr9tDeINZOo';
 
 			var data = stringifyArrayData(networks, organization, countries, languages);
@@ -22,7 +22,7 @@ function Query($http) {
 				//	url: 'http://api.data.gov/bbg/search?api_key=' + API_KEY + '&details=1',
 					method: 'GET',
 					params: { network: data.networks, organization: data.organizations, country: data.countries,
-						language: data.languages, q: keywords }
+						language: data.languages, q: keywords, type: contentFilter }
 				})
 				.then(function(response) {
 					return response.data;

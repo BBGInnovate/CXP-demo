@@ -12,7 +12,7 @@
 .add-column-btn {
     margin-left: 5px;
     position: relative;
-    top: 100px
+    top: 120px
 }
 
 .widget .widget-body {
@@ -498,6 +498,12 @@ a:hover {
 }
 
 .menu-large {
-    width: 460px;
+    width: 600px;
+    height: 500px;
+    overflow-y: scroll;
+}
+
+#up-arrow {
+    display: none;
 }
 
