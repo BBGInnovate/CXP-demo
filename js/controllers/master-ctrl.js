@@ -185,7 +185,9 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 
 
 
+
 	$scope.addColumn = function() {
+
 	//	$scope.hideAllMenus();
 
 		$scope.noResultsFound = null;
@@ -198,7 +200,7 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 
 
 		Query.getData($scope.selectedNetworks, $scope.selectedOrganizations, $scope.selectedCountries,
-			$scope.selectedLanguages, $scope.keywords)
+			$scope.selectedLanguages, $scope.keywords, $scope.contentfilter)
 			.then(function(response) {
 
 				$scope.fullWidth = '';

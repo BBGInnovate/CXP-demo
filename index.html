@@ -78,6 +78,24 @@
             //    $(this).children()[1].style.paddingLeft = '0px';
             });
 
+            /*
+            attempt to add scrolling arrows
+            $('.dropdown-menu').on('scroll', function() {
+                if($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight) {
+                    $('#down-arrow').hide();
+                    $('#up-arrow').show();
+                } else if ($(this).scrollTop() === 0) {
+                    $('#up-arrow').hide();
+                    $('#down-arrow').show();
+                } else if ($(this).scrollTop() > 20) {
+                    $('#up-arrow').show();
+                    $('#down-arrow').show();
+                }
+            })
+            */
+
+
+
         });
 
 
@@ -118,13 +136,31 @@
         <li><p class="instructions">Please select filters then click "Add Column".</p></li>
         <li class="sidebar-list">
             <form id="filters" style="margin-top: 180px">
+                <div class="content-filters" style="color: white; position: relative; top: 40px; left: -16px">
+                    <p style="margin-left: 19px">Content Filters</p>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" value="audio,video" ng-model="contentfilter">All
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" value="audio" ng-model="contentfilter">Audio
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" value="video" ng-model="contentfilter">Video
+                        </label>
+                    </div>
 
+                </div>
                 <div>
                     <button type="button" class="btn btn-primary add-column-btn" ng-click="addColumn()">Add Column</button>
                 </div>
                 <!-- Search Dropdown -->
 
-                <input type="text" style="margin-left: 20px; width: 160px;" class="form-control" id="keywords" ng-model="keywords" placeholder="Keywords">
+                <input type="text" style="margin-left: 20px; width: 160px; margin-top: 12px" class="form-control" id="keywords" ng-model="keywords" placeholder="Keywords">
 
 
 
