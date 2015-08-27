@@ -48,6 +48,9 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 	Mapping.networks()
 		.then(function(response) {
 			$scope.networks = response;
+
+			// call the angular filter to process the full network name
+			$scope.networks = $filter('showFullNetworkNames')($scope.networks);
 		});
 
 	Mapping.organizations()
