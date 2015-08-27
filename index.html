@@ -135,9 +135,9 @@
         <li class="sidebar-title"><span>NAVIGATION</span></li>
         <li><p class="instructions">Please select filters then click "Add Column".</p></li>
         <li class="sidebar-list">
-            <form id="filters" style="margin-top: 180px">
-                <div class="content-filters" style="color: white; position: relative; top: 40px; left: -16px">
-                    <p style="margin-left: 19px">Content Filters</p>
+            <form id="filters">
+                <div class="content-filters" ng-init="contentfilter='audio,video'">
+                    <p class="content-filters-text">Content Filters</p>
                     <div class="radio">
                         <label>
                             <input type="radio" value="audio,video" ng-model="contentfilter">All
@@ -160,7 +160,7 @@
                 </div>
                 <!-- Search Dropdown -->
 
-                <input type="text" style="margin-left: 20px; width: 160px; margin-top: 12px" class="form-control" id="keywords" ng-model="keywords" placeholder="Keywords">
+                <input type="text" class="form-control" id="keywords" ng-model="keywords" placeholder="Keywords">
 
 
 

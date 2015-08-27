@@ -507,3 +507,23 @@ a:hover {
     display: none;
 }
 
+.content-filters {
+    color: white;
+    position: relative;
+    top: 40px;
+    left: -16px
+}
+
+.content-filters-text {
+    margin-left: 19px
+}
+
+#keywords {
+    margin-left: 20px;
+    width: 160px;
+    margin-top: 12px
+}
+
+#filters {
+    margin-top: 180px
+}
