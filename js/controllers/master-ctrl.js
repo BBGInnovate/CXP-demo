@@ -216,7 +216,7 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 
 				// Initalize filters
 				var filters = $scope.processFilterString($scope.selectedNetworks, $scope.selectedOrganizations, $scope.selectedCountries,
-					$scope.selectedLanguages, $scope.keywords);
+					$scope.selectedLanguages, $scope.keywords, $scope.contentfilter);
 				$scope.column[$scope.columnNum].filters = filters;
 
 				// Set current filters for Favorites purposes
@@ -228,6 +228,8 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 					keywords: $scope.keywords
 				};
 
+				$scope.column[$scope.columnNum].pageNum = 1;
+
 
 				$scope.currentColumnNum = $scope.columnNum;
 
@@ -237,6 +239,8 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 					networks: $scope.selectedNetworks,
 					organizations: $scope.selectedOrganizations,
 					filters: filters,
+					keywords: $scope.keywords,
+					contentFilter: $scope.contentfilter,
 					columnNum: $scope.columnNum
 				};
 
@@ -288,7 +292,15 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 	};
 
 
-	$scope.processFilterString = function (networks, organizations, countries, languages, keywords) {
+	$scope.processFilterString = function (networks, organizations, countries, languages, keywords, contentFilter) {
+
+		if (contentFilter === 'audio,video') {
+			contentFilter = 'All';
+		} else {
+							// uppercase first letter of string
+			contentFilter = contentFilter[0].toUpperCase() + contentFilter.slice(1);
+		}
+
 		var filters = '';
 
 		for (var i = 0; i < countries.length; i++) {
@@ -313,6 +325,8 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 
 
 		filters = filters.substring(0, filters.length - 2);
+
+		filters += ' ('+contentFilter+')';
 
 		if (filters.length === 0) {
 			return 'All';
@@ -487,7 +501,7 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 	$scope.refreshData = function (columnNum) {
 
 		Query.getData(historyMap[columnNum].networks, historyMap[columnNum].organizations, historyMap[columnNum].countries,
-			historyMap[columnNum].languages, $scope.keywords)
+			historyMap[columnNum].languages, historyMap[columnNum].keywords, historyMap[columnNum].contentFilter)
 			.then(function (response) {
 
 			//	response.contents[0].title = 'test title : ' + Math.random();
@@ -501,6 +515,28 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 				if (historyMap[columnNum]) {
 					$scope.refreshData(columnNum);
 				}
+			});
+	};
+
+	$scope.getMore = function (columnNum, pageNum) {
+
+		pageNum++;
+
+		Query.getData(historyMap[columnNum].networks, historyMap[columnNum].organizations, historyMap[columnNum].countries,
+			historyMap[columnNum].languages, historyMap[columnNum].keywords, historyMap[columnNum].contentFilter, pageNum)
+			.then(function(response) {
+
+				for (var i = 0; i < response.contents.length; i++) {
+					$scope.column[columnNum].push(response.contents[i]);
+				}
+
+				$scope.column[columnNum].pageNum = pageNum;
+
+
+				//$scope.column[columnNum].concat(response.contents);
+
+
+
 			});
 	};
 

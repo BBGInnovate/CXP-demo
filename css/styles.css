@@ -527,3 +527,10 @@ a:hover {
 #filters {
     margin-top: 180px
 }
+
+.get-more-link {
+    float: right;
+    font-size: 12px;
+    position: relative;
+    top: -7px;
+}
