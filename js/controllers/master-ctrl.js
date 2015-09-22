@@ -3,9 +3,12 @@
  */
 
 angular.module('RDash')
-    .controller('MasterCtrl', ['$scope', '$cookieStore', 'Mapping', 'Query', '$sce', '$filter', MasterCtrl]);
+    .controller('MasterCtrl', ['$scope', '$cookieStore', 'Mapping', 'Query', '$sce', '$filter', 'cfpLoadingBar', MasterCtrl]);
 
-function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
+function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter, cfpLoadingBar) {
+
+	cfpLoadingBar.start();
+
 
     /**
      * Sidebar Toggle & Cookie Control
@@ -61,6 +64,7 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 	Mapping.languages()
 		.then(function(response) {
 			$scope.languages = response;
+			cfpLoadingBar.complete();
 		});
 
 	/*
@@ -481,6 +485,22 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter) {
 		} else {
 			$scope.column[parentIndex][index].translated = null;
 		}
+	};
+
+	$scope.humanTranslate = function (parentIndex, index) {
+		$scope.humanTranslatedTitle = $scope.column[parentIndex][index].title;
+		$scope.humanTranslatedDescription = $scope.column[parentIndex][index].description;
+
+		$scope.humanTranslatedTitleOrig = $scope.column[parentIndex][index].title;
+		$scope.humanTranslatedDescriptionOrig = $scope.column[parentIndex][index].description;
+	};
+
+	$scope.submitHumanTranslation = function () {
+		var humanTranslatedTitle = this.humanTranslatedTitle;
+		var humanTranslatedDescription = this.humanTranslatedDescription;
+
+		console.log(humanTranslatedTitle);
+		console.log(humanTranslatedDescription);
 	};
 
 	// this function checks for new data based on the interval specified at the top of the file

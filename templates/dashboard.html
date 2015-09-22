@@ -73,6 +73,48 @@
     </div>
 </div>
 
+<!-- Modal for Translate Content -->
+<div class="modal fade" id="translateModal" tabindex="-1" role="dialog" aria-labelledby="translateModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 675px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" ng-click="closeModal()">&times;</span></button>
+                <h4 class="modal-title" id="translateModalLabel">Human Translation</h4>
+            </div>
+            <form role="form" ng-submit="submitHumanTranslation()">
+                <div class="modal-body">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label></label>
+                            <input type="text" class="form-control" name="translated-title" placeholder="Title" value="{{ humanTranslatedTitleOrig }}" disabled>
+                        </div>
+
+                       <div class="form-group">
+                           <label></label>
+                           <textarea rows="6" class="form-control" name="translated-description" placeholder="Description" disabled>{{ humanTranslatedDescriptionOrig }}</textarea>
+                       </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="translated-title"></label>
+                            <input type="text" class="form-control" name="translated-title" id="translated-title" placeholder="Title" ng-model="humanTranslatedTitle">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="translated-description"></label>
+                            <textarea rows="6" class="form-control" name="translated-description" id="translated-description" placeholder="Description" ng-model="humanTranslatedDescription"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="float: left">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
                         <!-- Horizontal Column Scroll -->
 <div class="row" style="display: inline-flex; overflow: auto; width: 100%;">
@@ -152,9 +194,15 @@
                         </div>
                     </p>
 
-                    <p ng-style="{visibility: item._embedded.translated && 'visible' || 'hidden'}">
-                        <p class="label label-primary translate-button" ng-click="translate(columnIndex, $index)">Translate</p>
+                    <p ng-style="{visibility: item._embedded.translatable && 'visible' || 'hidden'}">
+                        <p class="label label-primary translate-button" ng-click="translate(columnIndex, $index)">Translate - {{ item._embedded.translatable }}</p>
                     </p>
+
+
+                    <p human-translate class="label label-primary translate-button" ng-click="humanTranslate(columnIndex, $index)">
+                        Human Translate
+                    </p>
+
 
 
                     <div class="social-media-buttons">
