@@ -181,11 +181,19 @@
 
 
                     <p>
-                        <a target="_blank" href="{{ item.object_name }}"><strong ng-if="item.translated">{{ item._embedded.translated[0].translated_title }}</strong></a>
+                        <a target="_blank" href="{{ item.object_name }}"><strong ng-if="item.translated">{{ item._embedded.translated[0].human_translated_title }}</strong></a>
                         <a target="_blank" href="{{ item.object_name }}"><strong ng-if="!item.translated">{{ item.title }}</strong></a>
                     </p>
                     <div ng-if="!item.translated" class="article-description" ng-bind-html="item.description"></div>
-                    <div ng-if="item.translated" class="article-description" ng-bind-html="item._embedded.translated[0].translated_description"></div>
+                    <div ng-if="item.translated" class="article-description" ng-bind-html="item._embedded.translated[0].human_translated_description"></div>
+
+
+                    <p ng-style="{display: item.translation_status === 'completed' && 'block' || 'none'}" class="label label-primary translate-button" ng-click="translate(columnIndex, $index)">Translate</p>
+                    <p ng-hide="item.translation_status === 'completed'" ng-style="{display: !item.translatable && 'block' || 'none', background: item.loadingTranslate === null && 'lightgray' || '', cursor: item.loadingTranslate === null && 'default' || ''}" class="label label-warning translate-button" ng-click="item.loadingTranslate === null || requestTranslate(columnIndex, $index)">
+                        Request Translation <i class="fa fa-spinner fa-spin" ng-if="item.loadingTranslate"></i>
+                    </p>
+
+
                     <p style="font-size: 10px;" ng-repeat="audio in item._embedded.audios">
                         <div class="well inline-play glyphicon glyphicon-play" id="jplayer-{{columnIndex}}-{{$index}}" ng-if="item._embedded.audios" data-audio="{{ item._embedded.audios[0] }}" data-autoplay="false" data-pauseothers="true" jplayer></div>
                         <div class="player-meta" ng-if="item._embedded.audios">
@@ -194,14 +202,12 @@
                         </div>
                     </p>
 
-                    <p ng-style="{visibility: item._embedded.translatable && 'visible' || 'hidden'}">
-                        <p class="label label-primary translate-button" ng-click="translate(columnIndex, $index)">Translate - {{ item._embedded.translatable }}</p>
-                    </p>
 
-
+                    <!--
                     <p human-translate class="label label-primary translate-button" ng-click="humanTranslate(columnIndex, $index)">
                         Human Translate
                     </p>
+                    -->
 
 
 

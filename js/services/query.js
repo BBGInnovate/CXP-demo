@@ -9,10 +9,10 @@ angular.module('RDash')
 	.factory('Query', ['$http', Query]);
 
 function Query($http) {
-//	var API_KEY = 'GeMcYM6rB4z6xnuYyVTSKCo2wM8VeP5ViwRtydWE';
+	var API_KEY = 'rIFMx4sUh7USYmdCtvlqmuMGAWq1Qfr9tDeINZOo';
 	var data = {
 		getData: function(networks, organization, countries, languages, keywords, contentFilter, pageNum) {
-			var API_KEY = 'rIFMx4sUh7USYmdCtvlqmuMGAWq1Qfr9tDeINZOo';
+
 
 			var data = stringifyArrayData(networks, organization, countries, languages);
 
@@ -27,7 +27,17 @@ function Query($http) {
 				.then(function(response) {
 					return response.data;
 				});
+		},
+		submitDataToOneHourTranslation: function (uuid) {
+			return	$http({
+				url: 'https://cxp.bbg.gov/api/translations/'+uuid+'/to_onehour/?api_key='+API_KEY,
+				method: 'GET'
+				})
+				.then(function(response) {
+					return response.data;
+				});
 		}
+
 	};
 
 	return data;
