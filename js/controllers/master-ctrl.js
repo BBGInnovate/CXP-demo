@@ -480,28 +480,27 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter, cfpLoad
 	};
 
 	$scope.translate = function (parentIndex, index) {
-		if (!$scope.column[parentIndex][index].translated) {
+		// if the translation status is completed and it hasn't been clicked already (translate)
+		if ($scope.column[parentIndex][index].translation_status === 'completed' && $scope.column[parentIndex][index].translated === null) {
 			$scope.column[parentIndex][index].translated = true;
+
+		// set it back to null for original value
 		} else {
 			$scope.column[parentIndex][index].translated = null;
 		}
 	};
 
-	$scope.humanTranslate = function (parentIndex, index) {
-		$scope.humanTranslatedTitle = $scope.column[parentIndex][index].title;
-		$scope.humanTranslatedDescription = $scope.column[parentIndex][index].description;
+	$scope.requestTranslate = function (parentIndex, index) {
+		$scope.column[parentIndex][index].loadingTranslate = true;
+		var id = $scope.column[parentIndex][index].uuid;
 
-		$scope.humanTranslatedTitleOrig = $scope.column[parentIndex][index].title;
-		$scope.humanTranslatedDescriptionOrig = $scope.column[parentIndex][index].description;
+
+		Query.submitDataToOneHourTranslation(id).then(function (response) {
+			$scope.column[parentIndex][index].loadingTranslate = null;
+		});
+
 	};
 
-	$scope.submitHumanTranslation = function () {
-		var humanTranslatedTitle = this.humanTranslatedTitle;
-		var humanTranslatedDescription = this.humanTranslatedDescription;
-
-		console.log(humanTranslatedTitle);
-		console.log(humanTranslatedDescription);
-	};
 
 	// this function checks for new data based on the interval specified at the top of the file
 	setInterval(function () {

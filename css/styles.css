@@ -494,7 +494,11 @@ a:hover {
 
 .translate-button {
     cursor: pointer;
-    line-height: 3;
+    font-weight: 100 !important;
+    font-size: 10px !important;
+    margin: 15px 0px 15px 0px !important;
+    padding: 5px !important;
+    float: right;
 }
 
 .menu-large {
@@ -533,4 +537,16 @@ a:hover {
     font-size: 12px;
     position: relative;
     top: -7px;
+}
+
+.show-translate-button {
+    visibility: visible;
+}
+
+.hide-translate-button {
+    visibility: hidden;
+}
+
+.fa-spin {
+    margin: 0px 1px 0px 7px !important
 }
