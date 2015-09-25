@@ -550,3 +550,8 @@ a:hover {
 .fa-spin {
     margin: 0px 1px 0px 7px !important
 }
+
+.translation-pending {
+    cursor: default;
+    background: lightgray;
+}

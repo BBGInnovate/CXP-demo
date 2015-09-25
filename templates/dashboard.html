@@ -189,8 +189,11 @@
 
 
                     <p ng-style="{display: item.translation_status === 'completed' && 'block' || 'none'}" class="label label-primary translate-button" ng-click="translate(columnIndex, $index)">Translate</p>
-                    <p ng-hide="item.translation_status === 'completed'" ng-style="{display: !item.translatable && 'block' || 'none', background: item.loadingTranslate === null && 'lightgray' || '', cursor: item.loadingTranslate === null && 'default' || ''}" class="label label-warning translate-button" ng-click="item.loadingTranslate === null || requestTranslate(columnIndex, $index)">
+                    <p ng-show="item.translation_status === 'not started'" ng-style="{display: !item.translatable && 'block' || 'none', background: item.loadingTranslate === null && 'lightgray' || '', cursor: item.loadingTranslate === null && 'default' || ''}" class="label label-warning translate-button" ng-click="item.loadingTranslate === null || requestTranslate(columnIndex, $index)">
                         Request Translation <i class="fa fa-spinner fa-spin" ng-if="item.loadingTranslate"></i>
+                    </p>
+                    <p ng-show="item.translation_status === 'pending'" class="label label-primary translate-button translation-pending">
+                        Translation Pending
                     </p>
 
 
