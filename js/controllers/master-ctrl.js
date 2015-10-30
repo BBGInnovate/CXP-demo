@@ -209,85 +209,99 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter, cfpLoad
 		Query.getData($scope.selectedNetworks, $scope.selectedOrganizations, $scope.selectedCountries,
 			$scope.selectedLanguages, $scope.keywords, $scope.contentfilter)
 			.then(function(response) {
+				if (response.contents) {
+					$scope.fullWidth = '';
 
-				$scope.fullWidth = '';
+					$scope.column[$scope.columnNum] = response.contents;
 
-				$scope.column[$scope.columnNum] = response.contents;
-
-
-				// no longer loading
-				$scope.loading[$scope.columnNum] = false;
-
-				// Initalize filters
-				var filters = $scope.processFilterString($scope.selectedNetworks, $scope.selectedOrganizations, $scope.selectedCountries,
-					$scope.selectedLanguages, $scope.keywords, $scope.contentfilter);
-				$scope.column[$scope.columnNum].filters = filters;
-
-				// Set current filters for Favorites purposes
-				$scope.column[$scope.columnNum].currentFilters = {
-					countries: $scope.selectedCountries,
-					languages: $scope.selectedLanguages,
-					networks: $scope.selectedNetworks,
-					organizations: $scope.selectedOrganizations,
-					keywords: $scope.keywords
-				};
-
-				$scope.column[$scope.columnNum].pageNum = 1;
+					/*
+					if ($scope.column[$scope.columnNum].manchine_translatable === true && $scope.column[$scope.columnNum].translatable === true) {
+						$scope.column[$scope.columnNum].showMachineTranslateButton = true;
+					} else if ($scope.column[$scope.columnNum].manchine_translatable === false) {
+						$scope.column[$scope.columnNum].showHumanTranslateButton = true;
+					}
+					*/
 
 
-				$scope.currentColumnNum = $scope.columnNum;
+					// no longer loading
+					$scope.loading[$scope.columnNum] = false;
 
-				var currentColumnFilters = {
-					countries: $scope.selectedCountries,
-					languages: $scope.selectedLanguages,
-					networks: $scope.selectedNetworks,
-					organizations: $scope.selectedOrganizations,
-					filters: filters,
-					keywords: $scope.keywords,
-					contentFilter: $scope.contentfilter,
-					columnNum: $scope.columnNum
-				};
+					// Initalize filters
+					var filters = $scope.processFilterString($scope.selectedNetworks, $scope.selectedOrganizations, $scope.selectedCountries,
+						$scope.selectedLanguages, $scope.keywords, $scope.contentfilter);
+					$scope.column[$scope.columnNum].filters = filters;
 
-				// set the data for the historyMap
-				historyMap[$scope.columnNum] = currentColumnFilters;
+					// Set current filters for Favorites purposes
+					$scope.column[$scope.columnNum].currentFilters = {
+						countries: $scope.selectedCountries,
+						languages: $scope.selectedLanguages,
+						networks: $scope.selectedNetworks,
+						organizations: $scope.selectedOrganizations,
+						keywords: $scope.keywords
+					};
+
+					$scope.column[$scope.columnNum].pageNum = 1;
 
 
-				if ($scope.column[$scope.columnNum].length === 0) {
-					$scope.noResultsFound = true;
-					$scope.column.splice($scope.columnNum, 1);
+					$scope.currentColumnNum = $scope.columnNum;
+
+					var currentColumnFilters = {
+						countries: $scope.selectedCountries,
+						languages: $scope.selectedLanguages,
+						networks: $scope.selectedNetworks,
+						organizations: $scope.selectedOrganizations,
+						filters: filters,
+						keywords: $scope.keywords,
+						contentFilter: $scope.contentfilter,
+						columnNum: $scope.columnNum
+					};
+
+					// set the data for the historyMap
+					historyMap[$scope.columnNum] = currentColumnFilters;
+
+
+					if ($scope.column[$scope.columnNum].length === 0) {
+						$scope.noResultsFound = true;
+						$scope.column.splice($scope.columnNum, 1);
+					} else {
+						$scope.noResultsFound = null;
+						$scope.columnNum++;
+					}
+
+					// set history
+					$scope.currentColumnCountries = $scope.selectedCountries;
+					$scope.currentColumnLanguages = $scope.selectedLanguages;
+					$scope.currentColumnNetworks = $scope.selectedNetworks;
+					$scope.currentColumnOrganizations = $scope.selectedOrganizations;
+
+
+					// collapse all the menus
+					$scope.countriesList = null;
+					$scope.networksList = null;
+					$scope.organizationsList = null;
+					$scope.languagesList = null;
+
+					// reset values
+					$scope.selectedCountries = [];
+					$scope.selectedLanguages = [];
+					$scope.selectedNetworks = [];
+					$scope.selectedOrganizations = [];
+
+					$scope.keywords = '';
+
+
+					// reset form
+					//document.getElementById('filters').reset();
+					document.getElementById('column-filters').reset();
 				} else {
-					$scope.noResultsFound = null;
-					$scope.columnNum++;
+					// set loading indicator to false;
+					$scope.loading[$scope.columnNum] = false;
+
+					// destroy column
+					$scope.column.splice($scope.columnNum, 1);
+
+					alert('No results found');
 				}
-
-
-
-
-				// set history
-				$scope.currentColumnCountries = $scope.selectedCountries;
-				$scope.currentColumnLanguages = $scope.selectedLanguages;
-				$scope.currentColumnNetworks = $scope.selectedNetworks;
-				$scope.currentColumnOrganizations = $scope.selectedOrganizations;
-
-
-				// collapse all the menus
-				$scope.countriesList = null;
-				$scope.networksList = null;
-				$scope.organizationsList = null;
-				$scope.languagesList = null;
-
-				// reset values
-				$scope.selectedCountries = [];
-				$scope.selectedLanguages = [];
-				$scope.selectedNetworks = [];
-				$scope.selectedOrganizations = [];
-
-				$scope.keywords = '';
-
-
-				// reset form
-				//document.getElementById('filters').reset();
-				document.getElementById('column-filters').reset();
 
 		});
 
@@ -490,14 +504,53 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter, cfpLoad
 		}
 	};
 
-	$scope.requestTranslate = function (parentIndex, index) {
-		$scope.column[parentIndex][index].loadingTranslate = true;
+	$scope.requestHumanTranslate = function (parentIndex, index) {
+		var id = $scope.column[parentIndex][index].uuid;
+
+		Query.submitDataToOneHourTranslation(id).then(function (response) {
+			$scope.column[parentIndex][index].human_translation_requested = true;
+		});
+
+	};
+
+	$scope.requestMachineTranslate = function (parentIndex, index) {
 		var id = $scope.column[parentIndex][index].uuid;
 
 
-		Query.submitDataToOneHourTranslation(id).then(function (response) {
-			$scope.column[parentIndex][index].loadingTranslate = null;
+		Query.submitDataToBingTranslation(id).then(function (response) {
+
+			$scope.column[parentIndex][index].translation_requested = true;
+
+			// translation found
+			if (response.msg.indexOf('completed') > -1 && response.title.length > 0) {
+				var translation = [{
+					translated_title: response.title,
+					translated_description: response.description
+				}];
+				$scope.column[parentIndex][index]._embedded.translated = translation;
+
+				// toggle the translation shown
+				if (!$scope.column[parentIndex][index].showMachineTranslation) {
+					$scope.column[parentIndex][index].showMachineTranslation = true;
+				} else if ($scope.column[parentIndex][index].showMachineTranslation === true) {
+					$scope.column[parentIndex][index].showMachineTranslation = null;
+				}
+
+			} else {
+				alert (response.msg + ' ' + 'Title: ' + response.title + ' ' + 'Description: ' + response.description);
+			}
 		});
+
+	};
+
+	$scope.showMachineTranslation = function (parentIndex, index) {
+
+		// toggle translation shown
+		if (!$scope.column[parentIndex][index].showMachineTranslation) {
+			$scope.column[parentIndex][index].showMachineTranslation = true;
+		} else if ($scope.column[parentIndex][index].showMachineTranslation === true) {
+			$scope.column[parentIndex][index].showMachineTranslation = null;
+		}
 
 	};
 

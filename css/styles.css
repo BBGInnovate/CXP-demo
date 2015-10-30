@@ -552,6 +552,41 @@ a:hover {
 }
 
 .translation-pending {
-    cursor: default;
-    background: lightgray;
+    cursor: default !important;
+    color: lightgray !important;
+}
+
+.human-translate {
+    margin-top: -7px !important;
+}
+
+.one-hour {
+    background: #FF7800 !important;
+}
+
+.translation-dropdown-list li a {
+    cursor: pointer;
+}
+
+.translation-dropdown {
+    float: right;
+    margin: 10px 0px 10px 0px;
+}
+
+.translate-button-dropdown {
+    font-size: 10px !important;
+    padding: 3px 8px !important;
+    background: #337AB7;
+    color: white;
+    border: none
+}
+
+.translate-button-dropdown:hover, .translate-button-dropdown:focus, .translate-button-dropdown:active, .translate-button-dropdown.active, .open > .dropdown-toggle.translate-button-dropdown {
+    background: #275d8c !important;
+    color: white !important;
+}
+
+.translation-dropdown-list {
+    font-size: 10px !important;
+    padding: 2px 1px !important;
 }

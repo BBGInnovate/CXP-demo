@@ -30,8 +30,17 @@ function Query($http) {
 		},
 		submitDataToOneHourTranslation: function (uuid) {
 			return	$http({
-				url: 'https://cxp.bbg.gov/api/translations/'+uuid+'/to_onehour/?api_key='+API_KEY,
-				method: 'GET'
+					url: 'https://cxp.bbg.gov/api/translations/'+uuid+'/to_onehour/?api_key='+API_KEY,
+					method: 'GET'
+				})
+				.then(function(response) {
+					return response.data;
+				});
+		},
+		submitDataToBingTranslation: function (uuid) {
+			return	$http({
+					url: 'https://cxp.bbg.gov/api/translations/'+uuid+'/to_bing/?api_key='+API_KEY,
+					method: 'GET'
 				})
 				.then(function(response) {
 					return response.data;
