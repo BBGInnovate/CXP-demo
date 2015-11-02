@@ -293,6 +293,21 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter, cfpLoad
 					// reset form
 					//document.getElementById('filters').reset();
 					document.getElementById('column-filters').reset();
+
+
+					/*
+					un-comment out this block to fake translations
+					// testing here
+					var translation = [{
+						translated_title: 'test me',
+						translated_description: 'test me here',
+						"human_translated_title": "aaaaaa  nnnn",
+						"human_translated_description": "bbbb mmmm"
+					}];
+					$scope.column[0][0]._embedded.translated = translation;
+					$scope.column[0][0].translation_status = 'pending';
+					*/
+
 				} else {
 					// set loading indicator to false;
 					$scope.loading[$scope.columnNum] = false;
@@ -545,11 +560,27 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter, cfpLoad
 
 	$scope.showMachineTranslation = function (parentIndex, index) {
 
-		// toggle translation shown
+		// toggle machine translation shown
 		if (!$scope.column[parentIndex][index].showMachineTranslation) {
 			$scope.column[parentIndex][index].showMachineTranslation = true;
+			$scope.column[parentIndex][index].showHumanTranslation = null;
 		} else if ($scope.column[parentIndex][index].showMachineTranslation === true) {
 			$scope.column[parentIndex][index].showMachineTranslation = null;
+			$scope.column[parentIndex][index].showHumanTranslation = null;
+		}
+
+	};
+
+	$scope.showHumanTranslation = function (parentIndex, index) {
+
+		// toggle human translation shown
+		if (!$scope.column[parentIndex][index].showHumanTranslation) {
+			$scope.column[parentIndex][index].showHumanTranslation = true;
+			$scope.column[parentIndex][index].showMachineTranslation = null;
+		} else if ($scope.column[parentIndex][index].showHumanTranslation === true) {
+			$scope.column[parentIndex][index].showHumanTranslation = null;
+			$scope.column[parentIndex][index].showMachineTranslation = null;
+
 		}
 
 	};
