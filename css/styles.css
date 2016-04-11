@@ -417,8 +417,12 @@ a:hover {
 
 .column-dropdown-content {
     left: -162px;
-    padding: 10px 10px 10px 0;
+    padding: 0 !important;
     top: -2px;
+}
+
+.column-option p {
+    margin: 0 !important;
 }
 
 .bars {
