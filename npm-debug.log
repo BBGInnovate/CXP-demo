@@ -1,0 +1,211 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'bfg' ]
+2 info using npm@1.3.24
+3 info using node@v4.2.4
+4 verbose cache add [ 'bfg', null ]
+5 verbose cache add name=undefined spec="bfg" args=["bfg",null]
+6 verbose parsed url Url {
+6 verbose parsed url   protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'bfg',
+6 verbose parsed url   path: 'bfg',
+6 verbose parsed url   href: 'bfg' }
+7 silly lockFile 0b69dded-bfg bfg
+8 verbose lock bfg /Users/hayatnoor/.npm/0b69dded-bfg.lock
+9 silly lockFile 0b69dded-bfg bfg
+10 silly lockFile 0b69dded-bfg bfg
+11 verbose addNamed [ 'bfg', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile 0cf12af3-bfg bfg@
+14 verbose lock bfg@ /Users/hayatnoor/.npm/0cf12af3-bfg.lock
+15 silly addNameRange { name: 'bfg', range: '*', hasData: false }
+16 verbose url raw bfg
+17 verbose url resolving [ 'https://registry.npmjs.org/', './bfg' ]
+18 verbose url resolved https://registry.npmjs.org/bfg
+19 info trying registry request attempt 1 at 11:15:13 AM
+20 http GET https://registry.npmjs.org/bfg
+21 http 200 https://registry.npmjs.org/bfg
+22 silly registry.get cb [ 200,
+22 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+22 silly registry.get     etag: '"AXULQ7JNBB4SE6K6H0MAG3A1Z"',
+22 silly registry.get     'content-type': 'application/json',
+22 silly registry.get     'cache-control': 'max-age=300',
+22 silly registry.get     'content-length': '12767',
+22 silly registry.get     'accept-ranges': 'bytes',
+22 silly registry.get     date: 'Mon, 09 May 2016 15:15:13 GMT',
+22 silly registry.get     via: '1.1 varnish',
+22 silly registry.get     age: '0',
+22 silly registry.get     connection: 'close',
+22 silly registry.get     'x-served-by': 'cache-atl6237-ATL',
+22 silly registry.get     'x-cache': 'MISS',
+22 silly registry.get     'x-cache-hits': '0',
+22 silly registry.get     'x-timer': 'S1462806913.419091,VS0,VE134',
+22 silly registry.get     vary: 'Accept-Encoding' } ]
+23 silly addNameRange number 2 { name: 'bfg', range: '*', hasData: true }
+24 silly addNameRange versions [ 'bfg',
+24 silly addNameRange   [ '0.0.3', '0.0.4', '0.1.0', '0.2.0', '0.2.1', '0.2.2', '0.3.0' ] ]
+25 verbose addNamed [ 'bfg', '0.3.0' ]
+26 verbose addNamed [ '0.3.0', '0.3.0' ]
+27 silly lockFile 1baf27e4-bfg-0-3-0 bfg@0.3.0
+28 verbose lock bfg@0.3.0 /Users/hayatnoor/.npm/1baf27e4-bfg-0-3-0.lock
+29 silly lockFile f300fbd5-stry-npmjs-org-bfg-bfg-0-3-0-tgz https://registry.npmjs.org/bfg/-/bfg-0.3.0.tgz
+30 verbose lock https://registry.npmjs.org/bfg/-/bfg-0.3.0.tgz /Users/hayatnoor/.npm/f300fbd5-stry-npmjs-org-bfg-bfg-0-3-0-tgz.lock
+31 verbose addRemoteTarball [ 'https://registry.npmjs.org/bfg/-/bfg-0.3.0.tgz',
+31 verbose addRemoteTarball   '789e65936062dafa126a5dcd8cbd642894c67144' ]
+32 info retry fetch attempt 1 at 11:15:13 AM
+33 verbose fetch to= /var/folders/ld/ft6bw06d5g77mxrnzbzy6f9r0000gn/T/npm-64188-LJeCYamU/1462806913748-0.5576490932144225/tmp.tgz
+34 http GET https://registry.npmjs.org/bfg/-/bfg-0.3.0.tgz
+35 http 200 https://registry.npmjs.org/bfg/-/bfg-0.3.0.tgz
+36 verbose tar unpack /var/folders/ld/ft6bw06d5g77mxrnzbzy6f9r0000gn/T/npm-64188-LJeCYamU/1462806913748-0.5576490932144225/tmp.tgz
+37 silly lockFile 46384b10-13748-0-5576490932144225-package tar:///var/folders/ld/ft6bw06d5g77mxrnzbzy6f9r0000gn/T/npm-64188-LJeCYamU/1462806913748-0.5576490932144225/package
+38 verbose lock tar:///var/folders/ld/ft6bw06d5g77mxrnzbzy6f9r0000gn/T/npm-64188-LJeCYamU/1462806913748-0.5576490932144225/package /Users/hayatnoor/.npm/46384b10-13748-0-5576490932144225-package.lock
+39 silly lockFile 18ffd751-13748-0-5576490932144225-tmp-tgz tar:///var/folders/ld/ft6bw06d5g77mxrnzbzy6f9r0000gn/T/npm-64188-LJeCYamU/1462806913748-0.5576490932144225/tmp.tgz
+40 verbose lock tar:///var/folders/ld/ft6bw06d5g77mxrnzbzy6f9r0000gn/T/npm-64188-LJeCYamU/1462806913748-0.5576490932144225/tmp.tgz /Users/hayatnoor/.npm/18ffd751-13748-0-5576490932144225-tmp-tgz.lock
+41 silly gunzTarPerm modes [ '755', '644' ]
+42 silly gunzTarPerm extractEntry package.json
+43 silly gunzTarPerm extractEntry .npmignore
+44 silly gunzTarPerm extractEntry README.md
+45 silly gunzTarPerm extractEntry LICENSE
+46 silly gunzTarPerm extractEntry Makefile
+47 silly gunzTarPerm extractEntry src/cli.js
+48 silly gunzTarPerm extractEntry src/disk.js
+49 silly gunzTarPerm extractEntry src/formparser.js
+50 silly gunzTarPerm extractEntry src/index.js
+51 silly gunzTarPerm extractEntry src/rackspace.js
+52 silly gunzTarPerm extractEntry src/tools.js
+53 silly gunzTarPerm extractEntry test/test.js
+54 silly gunzTarPerm extractEntry test/fixtures/hello.back.txt
+55 silly gunzTarPerm extractEntry test/fixtures/hello.txt
+56 silly lockFile 46384b10-13748-0-5576490932144225-package tar:///var/folders/ld/ft6bw06d5g77mxrnzbzy6f9r0000gn/T/npm-64188-LJeCYamU/1462806913748-0.5576490932144225/package
+57 silly lockFile 46384b10-13748-0-5576490932144225-package tar:///var/folders/ld/ft6bw06d5g77mxrnzbzy6f9r0000gn/T/npm-64188-LJeCYamU/1462806913748-0.5576490932144225/package
+58 silly lockFile 18ffd751-13748-0-5576490932144225-tmp-tgz tar:///var/folders/ld/ft6bw06d5g77mxrnzbzy6f9r0000gn/T/npm-64188-LJeCYamU/1462806913748-0.5576490932144225/tmp.tgz
+59 silly lockFile 18ffd751-13748-0-5576490932144225-tmp-tgz tar:///var/folders/ld/ft6bw06d5g77mxrnzbzy6f9r0000gn/T/npm-64188-LJeCYamU/1462806913748-0.5576490932144225/tmp.tgz
+60 verbose tar pack [ '/Users/hayatnoor/.npm/bfg/0.3.0/package.tgz',
+60 verbose tar pack   '/var/folders/ld/ft6bw06d5g77mxrnzbzy6f9r0000gn/T/npm-64188-LJeCYamU/1462806913748-0.5576490932144225/package' ]
+61 verbose tarball /Users/hayatnoor/.npm/bfg/0.3.0/package.tgz
+62 verbose folder /var/folders/ld/ft6bw06d5g77mxrnzbzy6f9r0000gn/T/npm-64188-LJeCYamU/1462806913748-0.5576490932144225/package
+63 silly lockFile 46384b10-13748-0-5576490932144225-package tar:///var/folders/ld/ft6bw06d5g77mxrnzbzy6f9r0000gn/T/npm-64188-LJeCYamU/1462806913748-0.5576490932144225/package
+64 verbose lock tar:///var/folders/ld/ft6bw06d5g77mxrnzbzy6f9r0000gn/T/npm-64188-LJeCYamU/1462806913748-0.5576490932144225/package /Users/hayatnoor/.npm/46384b10-13748-0-5576490932144225-package.lock
+65 silly lockFile da220c67-atnoor-npm-bfg-0-3-0-package-tgz tar:///Users/hayatnoor/.npm/bfg/0.3.0/package.tgz
+66 verbose lock tar:///Users/hayatnoor/.npm/bfg/0.3.0/package.tgz /Users/hayatnoor/.npm/da220c67-atnoor-npm-bfg-0-3-0-package-tgz.lock
+67 silly lockFile 46384b10-13748-0-5576490932144225-package tar:///var/folders/ld/ft6bw06d5g77mxrnzbzy6f9r0000gn/T/npm-64188-LJeCYamU/1462806913748-0.5576490932144225/package
+68 silly lockFile 46384b10-13748-0-5576490932144225-package tar:///var/folders/ld/ft6bw06d5g77mxrnzbzy6f9r0000gn/T/npm-64188-LJeCYamU/1462806913748-0.5576490932144225/package
+69 silly lockFile da220c67-atnoor-npm-bfg-0-3-0-package-tgz tar:///Users/hayatnoor/.npm/bfg/0.3.0/package.tgz
+70 silly lockFile da220c67-atnoor-npm-bfg-0-3-0-package-tgz tar:///Users/hayatnoor/.npm/bfg/0.3.0/package.tgz
+71 silly lockFile a79492c4--hayatnoor-npm-bfg-0-3-0-package /Users/hayatnoor/.npm/bfg/0.3.0/package
+72 verbose lock /Users/hayatnoor/.npm/bfg/0.3.0/package /Users/hayatnoor/.npm/a79492c4--hayatnoor-npm-bfg-0-3-0-package.lock
+73 silly lockFile a79492c4--hayatnoor-npm-bfg-0-3-0-package /Users/hayatnoor/.npm/bfg/0.3.0/package
+74 silly lockFile a79492c4--hayatnoor-npm-bfg-0-3-0-package /Users/hayatnoor/.npm/bfg/0.3.0/package
+75 verbose tar unpack /Users/hayatnoor/.npm/bfg/0.3.0/package.tgz
+76 silly lockFile 793d61bc--hayatnoor-npm-bfg-0-3-0-package tar:///Users/hayatnoor/.npm/bfg/0.3.0/package
+77 verbose lock tar:///Users/hayatnoor/.npm/bfg/0.3.0/package /Users/hayatnoor/.npm/793d61bc--hayatnoor-npm-bfg-0-3-0-package.lock
+78 silly lockFile da220c67-atnoor-npm-bfg-0-3-0-package-tgz tar:///Users/hayatnoor/.npm/bfg/0.3.0/package.tgz
+79 verbose lock tar:///Users/hayatnoor/.npm/bfg/0.3.0/package.tgz /Users/hayatnoor/.npm/da220c67-atnoor-npm-bfg-0-3-0-package-tgz.lock
+80 silly gunzTarPerm modes [ '755', '644' ]
+81 silly gunzTarPerm extractEntry package.json
+82 silly gunzTarPerm extractEntry .npmignore
+83 silly gunzTarPerm extractEntry README.md
+84 silly gunzTarPerm extractEntry LICENSE
+85 silly gunzTarPerm extractEntry Makefile
+86 silly gunzTarPerm extractEntry src/cli.js
+87 silly gunzTarPerm extractEntry src/disk.js
+88 silly gunzTarPerm extractEntry src/formparser.js
+89 silly gunzTarPerm extractEntry src/index.js
+90 silly gunzTarPerm extractEntry src/rackspace.js
+91 silly gunzTarPerm extractEntry src/tools.js
+92 silly gunzTarPerm extractEntry test/test.js
+93 silly gunzTarPerm extractEntry test/fixtures/hello.back.txt
+94 silly gunzTarPerm extractEntry test/fixtures/hello.txt
+95 silly lockFile 793d61bc--hayatnoor-npm-bfg-0-3-0-package tar:///Users/hayatnoor/.npm/bfg/0.3.0/package
+96 silly lockFile 793d61bc--hayatnoor-npm-bfg-0-3-0-package tar:///Users/hayatnoor/.npm/bfg/0.3.0/package
+97 silly lockFile da220c67-atnoor-npm-bfg-0-3-0-package-tgz tar:///Users/hayatnoor/.npm/bfg/0.3.0/package.tgz
+98 silly lockFile da220c67-atnoor-npm-bfg-0-3-0-package-tgz tar:///Users/hayatnoor/.npm/bfg/0.3.0/package.tgz
+99 verbose chmod /Users/hayatnoor/.npm/bfg/0.3.0/package.tgz 644
+100 verbose chown /Users/hayatnoor/.npm/bfg/0.3.0/package.tgz [ 501, 20 ]
+101 silly lockFile f300fbd5-stry-npmjs-org-bfg-bfg-0-3-0-tgz https://registry.npmjs.org/bfg/-/bfg-0.3.0.tgz
+102 silly lockFile f300fbd5-stry-npmjs-org-bfg-bfg-0-3-0-tgz https://registry.npmjs.org/bfg/-/bfg-0.3.0.tgz
+103 silly lockFile 1baf27e4-bfg-0-3-0 bfg@0.3.0
+104 silly lockFile 1baf27e4-bfg-0-3-0 bfg@0.3.0
+105 silly lockFile 0cf12af3-bfg bfg@
+106 silly lockFile 0cf12af3-bfg bfg@
+107 silly resolved [ { name: 'bfg',
+107 silly resolved     version: '0.3.0',
+107 silly resolved     description: 'Big Friendly Gateway creates a read and write stream to various cloud storage providers',
+107 silly resolved     main: 'src/index.js',
+107 silly resolved     bin: { bfg: './src/cli.js' },
+107 silly resolved     scripts: { test: 'make test' },
+107 silly resolved     repository: { type: 'git', url: 'https://github.com/binocarlos/bfg.git' },
+107 silly resolved     keywords:
+107 silly resolved      [ 'cloud',
+107 silly resolved        'storage',
+107 silly resolved        'stream',
+107 silly resolved        'filestore',
+107 silly resolved        'save',
+107 silly resolved        'proxy',
+107 silly resolved        'file',
+107 silly resolved        'fs' ],
+107 silly resolved     author: { name: 'Kai Davenport' },
+107 silly resolved     license: 'MIT',
+107 silly resolved     bugs: { url: 'https://github.com/binocarlos/bfg/issues' },
+107 silly resolved     homepage: 'https://github.com/binocarlos/bfg',
+107 silly resolved     devDependencies: { async: '~0.2.9', mocha: '~1.12.0', should: '~1.2.2' },
+107 silly resolved     dependencies: { busboy: '~0.2.3', pkgcloud: '~0.9.4', commander: '~2.1.0' },
+107 silly resolved     readme: 'bfg\n===\n\nBig Friendly Gateway creates a read and write stream to various cloud storage providers\n\nBFG is also the [Big Friendly Giant](http://en.wikipedia.org/wiki/The_BFG)\n\n## installation\n\n```\n$ npm install bfg\n```\n\n## usage\n\nbfg will create a WriteStream for uploads and a ReadStream for downloads to cloud storage providers.\n\nUpload a local file to rackspace:\n\n```js\nvar fs = require(\'fs\');\nvar bfg = require(\'bfg\');\n\nvar disk = bfg.rackspace({\n\tusername:\'...\',\n\tapikey:\'...\',\n\tregion:\'LON\',\n\tcontainer:\'my\'\n})\n\nvar localfile = fs.createReadStream(__dirname + \'/hello.txt\');\nvar remotefile = disk.createWriteStream(\'/hello.txt\');\n\nlocalfile.on(\'end\', function(){\n\tconsole.log(\'file uploaded!\');\n})\n\nlocalfile.pipe(remotefile);\n```\n\nBecause bfg is streaming - you can use pipe readstreams to HTTP responses:\n\n```js\nvar disk = bfg.rackspace(...);\n\n// proxy any request to /filestore to rackspace to serve\napp.use(\'/filestore\', function(req, res){\n\tdisk.createReadStream(req.url).pipe(res);\n})\n```\n\nbfg will also stream form uploads that contain files - this is useful for file uploads that you want to stream directly to the cloud provider:\n\n```js\nvar app = express();\nvar disk = bfg.rackspace(...);\n\napp.use(\'/filestore\', disk.handler());\n```\n\n## cli\n\nbfg can be used on the cli if you install it globally:\n\n```\n$ npm install bfg -g\n```\n\nyou can then pipe files to and from bfg - the options are configured on the command line:\n\n```\nUsage: bfg [options] [command]\n\nCommands:\n\n  upload                 upload a file\n  download               download a file\n\nOptions:\n\n  -h, --help               output usage information\n  -u, --username [value]   Rackspace Username\n  -k, --apikey [value]     Rackspace Api Key\n  -r, --region [value]     Rackspace Region\n  -c, --container [value]  Rackspace Container\n  -f, --folder [value]     Rackspace Folder\n  -V, --version            output the version number\n```\n\nThese options can also be configured from the envionment variables:\n\n * RACKSPACE_USERNAME\n * RACKSPACE_APIKEY\n * RACKSPACE_REGION\n * RACKSPACE_CONTAINER\n * RACKSPACE_FOLDER\n * RACKSPACE_CDN\n\nAssuming the environment variables are set - here is an example of streaming a local file to rackspace:\n\n```\n$ cat helloworld.txt | bfg upload /helloworld.txt\n```\n\nAnd streaming from rackspace to a local file:\n\n```\n$ bfg download /helloworld.txt > helloworld.txt\n```\n\n## api\n\n## var disk = bfg.rackspace({options:...})\n\nCreate a new disk from one of the cloud providers bfg supports.  The options vary depending on provider:\n\n### rackspace\n\n * username - the rackspace username\n * apikey - the rackspace apikey\n * region - the region in which your containers live (e.g. LON)\n * container - the name of the container to connect to\n\n## var rs = disk.createReadStream(filepath)\n\nCreate a ReadStream from the contents of the remote filepath\n\n```js\nvar disk = bfg.rackspace(...);\n\ndisk.createReadStream(\'/hello.txt\').pipe(fs.createWriteStream(__dirname + \'/hello.txt\'));\n```\n\n## var ws = disk.createWriteStream(filepath)\n\nCreate a WriteStream for the remote filepath\n\n```js\nvar disk = bfg.rackspace(...);\n\nfs.createReadStream(__dirname + \'/hello.txt\').pipe(disk.createWriteStream(\'/hello.txt\'));\n\n```\n\n## var handler = disk.handler()\n\nCreate a HTTP handler that will GET or POST requests via the appropriate stream\n\n```js\nvar app = express();\nvar disk = bfg.rackspace(...);\n\napp.use(\'/filestore\', disk.handler());\n```\n\n## CDN\n\nYou can instruct bfg to redirect GET requests to the CDN for the container.\n\nFirst you must pass the cdn option when you make a disk.\n\nSecond pass true to the handler function to get a handler that will redirect rather than stream directly:\n\n```js\nvar disk = bfg.rackspace({\n  username:...,\n  etc:...,\n  cdn:\'https://bf9164d97a0cd15823f4-4dba8edb0fc2b3e5cc0f769b1eea32ba.ssl.cf3.rackcdn.com\'\n})\n\napp.use(\'/filestore\', disk.handler(true));\n```\n\n## var folder = disk.folder(basepath)\n\nReturn a new disk that will save and load files relative to the given basepath\n\nThis is useful for partitioning a container for serveral projects.\n\n```js\nvar app = express();\nvar disk = bfg.rackspace(...);\nvar folder = disk.folder(\'/subfolder\')\n\nfs.createReadStream(__dirname + \'/hello.txt\').pipe(disk.createWriteStream(\'/hello.txt\'));\n```\n\nThe file is saved to \'/subfolder/hello.txt\'\n\n\n## events\n\n## disk.emit(\'upload\', filepath)\n\ntriggered when a file is uploaded to a disk\n\n## disk.emit(\'download\', filepath)\n\ntriggered when a file is downloaded from a disk\n\n## license\n\nMIT\n',
+107 silly resolved     readmeFilename: 'README.md',
+107 silly resolved     _id: 'bfg@0.3.0',
+107 silly resolved     dist: { shasum: '0a056f3756fe9633a5e4776fbd24a32e77f781f7' },
+107 silly resolved     _from: 'bfg@',
+107 silly resolved     _resolved: 'https://registry.npmjs.org/bfg/-/bfg-0.3.0.tgz' } ]
+108 info install bfg@0.3.0 into /usr/local/lib
+109 info installOne bfg@0.3.0
+110 info /usr/local/lib/node_modules/bfg unbuild
+111 verbose tar unpack /Users/hayatnoor/.npm/bfg/0.3.0/package.tgz
+112 silly lockFile 34aa3746-r-usr-local-lib-node-modules-bfg tar:///usr/local/lib/node_modules/bfg
+113 verbose lock tar:///usr/local/lib/node_modules/bfg /Users/hayatnoor/.npm/34aa3746-r-usr-local-lib-node-modules-bfg.lock
+114 silly lockFile da220c67-atnoor-npm-bfg-0-3-0-package-tgz tar:///Users/hayatnoor/.npm/bfg/0.3.0/package.tgz
+115 verbose lock tar:///Users/hayatnoor/.npm/bfg/0.3.0/package.tgz /Users/hayatnoor/.npm/da220c67-atnoor-npm-bfg-0-3-0-package-tgz.lock
+116 silly gunzTarPerm modes [ '755', '644' ]
+117 error Error: EACCES: permission denied, mkdir '/usr/local/lib/node_modules/bfg'
+117 error     at Error (native)
+117 error  { [Error: EACCES: permission denied, mkdir '/usr/local/lib/node_modules/bfg']
+117 error   errno: -13,
+117 error   code: 'EACCES',
+117 error   syscall: 'mkdir',
+117 error   path: '/usr/local/lib/node_modules/bfg',
+117 error   fstream_type: 'Directory',
+117 error   fstream_path: '/usr/local/lib/node_modules/bfg',
+117 error   fstream_class: 'DirWriter',
+117 error   fstream_stack:
+117 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
+117 error      '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:37:53',
+117 error      'FSReqWrap.oncomplete (fs.js:82:15)' ] }
+118 error Please try running this command again as root/Administrator.
+119 error System Darwin 13.3.0
+120 error command "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "bfg"
+121 error cwd /Users/hayatnoor/Downloads/rdash-angular/src
+122 error node -v v4.2.4
+123 error npm -v 1.3.24
+124 error path /usr/local/lib/node_modules/bfg
+125 error syscall mkdir
+126 error fstream_path /usr/local/lib/node_modules/bfg
+127 error fstream_type Directory
+128 error fstream_class DirWriter
+129 error code EACCES
+130 error errno -13
+131 error stack Error: EACCES: permission denied, mkdir '/usr/local/lib/node_modules/bfg'
+131 error stack     at Error (native)
+132 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
+132 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:37:53
+132 error fstream_stack FSReqWrap.oncomplete (fs.js:82:15)
+133 verbose exit [ -13, true ]
