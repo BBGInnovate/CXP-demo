@@ -327,7 +327,7 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter, cfpLoad
 
 	$scope.processFilterString = function (networks, organizations, countries, languages, keywords, contentFilter) {
 
-		if (contentFilter === 'audio,video') {
+		if (contentFilter === '') {
 			contentFilter = 'All';
 		} else {
 							// uppercase first letter of string

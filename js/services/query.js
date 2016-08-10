@@ -9,7 +9,6 @@ angular.module('RDash')
 	.factory('Query', ['$http', Query]);
 
 function Query($http) {
-	var API_KEY = ''; // YOUR API KEY HERE
 	var data = {
 		getData: function(networks, organization, countries, languages, keywords, contentFilter, pageNum) {
 

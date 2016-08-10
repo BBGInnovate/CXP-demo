@@ -9,7 +9,6 @@ angular.module('RDash')
 	.factory('Mapping', ['$http', Mapping]);
 
 function Mapping($http) {
-	var API_KEY = 'rIFMx4sUh7USYmdCtvlqmuMGAWq1Qfr9tDeINZOo';
 
 	var mappings = {
 		networks: function() {

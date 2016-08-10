@@ -140,11 +140,11 @@
         <li><p class="instructions">Please select filters then click "Add Column".</p></li>
         <li class="sidebar-list">
             <form id="filters">
-                <div class="content-filters" ng-init="contentfilter='audio,video'">
+                <div class="content-filters" ng-init="contentfilter=''">
                     <p class="content-filters-text">Content Filters</p>
                     <div class="radio">
                         <label>
-                            <input type="radio" value="audio,video" ng-model="contentfilter">All
+                            <input type="radio" value="" ng-model="contentfilter">All
                         </label>
                     </div>
                     <div class="radio">
