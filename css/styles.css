@@ -380,8 +380,8 @@ a:hover {
 }
 
 .social-media-buttons {
-    display: inline-block;
-    font-size: 26px;
+    height: 30px;
+    font-size: 22px
 }
 
 /*
