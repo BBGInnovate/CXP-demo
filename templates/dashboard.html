@@ -157,7 +157,7 @@
                         <span class="badge">{{ item.network.name }}</span>
                         <span class="pub-date">{{ item.pub_date | limitTo: 10 }}</span>
                     </div>
-                    <div id="box" ng-repeat="image in item._embedded.images | limitTo:1" ng-if="image.url" style="background: url('{{ image.url }}') repeat scroll 0 0 / cover  rgba(0, 0, 0, 0)">
+                    <div id="box" ng-repeat="image in item.media.images | limitTo:1" ng-if="image.url" style="background: url('{{ image.url }}') repeat scroll 0 0 / cover  rgba(0, 0, 0, 0)">
 
                         <div id="overlay">
 
@@ -183,13 +183,13 @@
                     <p>
                        <!-- <a target="_blank" href="{{ item.object_name }}"><strong ng-if="item.translated">{{ item._embedded.translated[0].human_translated_title }}</strong></a> -->
                         <a target="_blank" href="{{ item.object_name }}"><strong ng-if="!item.showMachineTranslation && !item.showHumanTranslation">{{ item.title }}</strong></a>
-                        <a target="_blank" href="{{ item.object_name }}"><strong ng-if="item.showMachineTranslation">{{ item._embedded.translated[0].translated_title }}</strong></a>
-                        <a target="_blank" href="{{ item.object_name }}"><strong ng-if="item.showHumanTranslation">{{ item._embedded.translated[0].human_translated_title }}</strong></a>
+                        <a target="_blank" href="{{ item.object_name }}"><strong ng-if="item.showMachineTranslation">{{ item.translated[0].translated_title }}</strong></a>
+                        <a target="_blank" href="{{ item.object_name }}"><strong ng-if="item.showHumanTranslation">{{ item.translated[0].human_translated_title }}</strong></a>
                     </p>
                     <div ng-if="!item.showMachineTranslation && !item.showHumanTranslation" class="article-description" ng-bind-html="item.description"></div>
                   <!--  <div ng-if="item.translated" class="article-description" ng-bind-html="item._embedded.translated[0].human_translated_description"></div> -->
-                    <div ng-if="item.showMachineTranslation" class="article-description" ng-bind-html="item._embedded.translated[0].translated_description"></div>
-                    <div ng-if="item.showHumanTranslation" class="article-description" ng-bind-html="item._embedded.translated[0].human_translated_description"></div>
+                    <div ng-if="item.showMachineTranslation" class="article-description" ng-bind-html="item.translated[0].translated_description"></div>
+                    <div ng-if="item.showHumanTranslation" class="article-description" ng-bind-html="item.translated[0].human_translated_description"></div>
 <!--
                     <p ng-style="{display: item.translation_status === 'completed' && 'block' || 'none'}" class="label label-primary translate-button" ng-click="translate(columnIndex, $index)">Translate</p>
                     <p ng-show="item.translation_status === 'not started'" ng-style="{display: !item.translatable && 'block' || 'none', background: item.loadingTranslate === null && 'lightgray' || '', cursor: item.loadingTranslate === null && 'default' || ''}" class="label label-warning translate-button" ng-click="item.loadingTranslate === null || requestTranslate(columnIndex, $index)">
@@ -208,9 +208,9 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu translation-dropdown-list pull-right" aria-labelledby="dropdownMenu1">
-                            <li ng-show="item.manchine_translatable === true && !item.translation_requested && !item._embedded.translated" ng-click="requestMachineTranslate(columnIndex, $index)"><a>Machine Translate</a></li>
-                            <li ng-show="item._embedded.translated" ng-click="showMachineTranslation(columnIndex, $index)"><a>Toggle Machine Translation</a></li>
-                            <li ng-show="item._embedded.translated" ng-click="showHumanTranslation(columnIndex, $index)"><a>Toggle Human Translation</a></li>
+                            <li ng-show="item.manchine_translatable === true && !item.translation_requested && !item.translated[0].translated_title" ng-click="requestMachineTranslate(columnIndex, $index)"><a>Machine Translate</a></li>
+                            <li ng-show="item.translated[0].translated_title" ng-click="showMachineTranslation(columnIndex, $index)"><a>Toggle Machine Translation</a></li>
+                            <li ng-show="item.translated.[0].translated_title" ng-click="showHumanTranslation(columnIndex, $index)"><a>Toggle Human Translation</a></li>
                             <li ng-show="item.translatable === true && !item.human_translation_requested && item.translation_status === 'not started'" ng-click="requestHumanTranslate(columnIndex, $index)"><a>Request Human Translation</a></li>
                             <li ng-show="item.human_translation_requested || item.translation_status === 'pending'"><a class="translation-pending">Human Translation Pending</a></li>
                         </ul>

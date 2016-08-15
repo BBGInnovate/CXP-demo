@@ -542,7 +542,8 @@ function MasterCtrl($scope, $cookieStore, Mapping, Query, $sce, $filter, cfpLoad
 					translated_title: response.title,
 					translated_description: response.description
 				}];
-				$scope.column[parentIndex][index]._embedded.translated = translation;
+				$scope.column[parentIndex][index].translated = translation;
+				console.log($scope.column[parentIndex][index].translated);
 
 				// toggle the translation shown
 				if (!$scope.column[parentIndex][index].showMachineTranslation) {
