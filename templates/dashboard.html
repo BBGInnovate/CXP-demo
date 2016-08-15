@@ -161,7 +161,7 @@
 
                         <div id="overlay">
 
-                            <div class="image-box" ng-class="item._embedded.videos[0] ? '' : 'full-width'">
+                            <div class="image-box" ng-class="item.media.videos[0] ? '' : 'full-width'">
                                 <div>
                                     <a target="_blank" class="media-link" ng-click="setImage(image.url)" data-toggle="modal" data-target="#myModal">
                                         <div class="sidebar-link"><p>Image</p><p class="fa fa-image"></p></div>
@@ -169,9 +169,9 @@
                                 </div>
                             </div>
 
-                            <div class="video-box" ng-if="item._embedded.videos[0]">
+                            <div class="video-box" ng-if="item.media.videos[0]">
                                 <div>
-                                    <a target="_blank" class="media-link" ng-click="setVideo(item._embedded.videos[0].url)" data-toggle="modal" data-target="#myModal">
+                                    <a target="_blank" class="media-link" ng-click="setVideo(item.media.videos[0].url)" data-toggle="modal" data-target="#myModal">
                                         <div class="sidebar-link"><p>Video</p><p class="fa fa-video-camera"></p></div>
                                     </a>
                                 </div>
@@ -231,9 +231,9 @@
                     </p>
                     -->
 
-                    <p style="font-size: 10px;" ng-repeat="audio in item._embedded.audios">
-                        <div class="well inline-play glyphicon glyphicon-play" id="jplayer-{{columnIndex}}-{{$index}}" ng-if="item._embedded.audios" data-audio="{{ item._embedded.audios[0] }}" data-autoplay="false" data-pauseothers="true" jplayer></div>
-                        <div class="player-meta" ng-if="item._embedded.audios">
+                    <p style="font-size: 10px;" ng-repeat="audio in item.media.audios">
+                        <div class="well inline-play glyphicon glyphicon-play" id="jplayer-{{columnIndex}}-{{$index}}" ng-if="item.media.audios" data-audio="{{ item.media.audios[0] }}" data-autoplay="false" data-pauseothers="true" jplayer></div>
+                        <div class="player-meta" ng-if="item.media.audios">
                             <span id="time-{{columnIndex}}-{{$index}}" class="time">0:00 /</span>
                             <span id="duration-{{columnIndex}}-{{$index}}" class="duration">0:00</span>
                         </div>
