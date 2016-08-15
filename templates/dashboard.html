@@ -186,7 +186,7 @@
                         <a target="_blank" href="{{ item.object_name }}"><strong ng-if="item.showMachineTranslation">{{ item.translated[0].translated_title }}</strong></a>
                         <a target="_blank" href="{{ item.object_name }}"><strong ng-if="item.showHumanTranslation">{{ item.translated[0].human_translated_title }}</strong></a>
                     </p>
-                    <div ng-if="!item.showMachineTranslation && !item.showHumanTranslation" class="article-description" ng-bind-html="item.description"></div>
+                    <div ng-if="!item.showMachineTranslation && !item.showHumanTranslation" class="article-description" ng-class="item.description.length > 160 ? 'description-long' : ''" ng-bind-html="item.description"></div>
                   <!--  <div ng-if="item.translated" class="article-description" ng-bind-html="item._embedded.translated[0].human_translated_description"></div> -->
                     <div ng-if="item.showMachineTranslation" class="article-description" ng-bind-html="item.translated[0].translated_description"></div>
                     <div ng-if="item.showHumanTranslation" class="article-description" ng-bind-html="item.translated[0].human_translated_description"></div>

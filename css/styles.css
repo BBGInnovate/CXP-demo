@@ -171,6 +171,20 @@ a:hover {
     font-size: 12px;
 }
 
+.description-long {
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    max-width: 400px;
+    height: 100px; /* Fallback for non-webkit */
+    margin: 0 auto;
+    font-size: 12px
+    line-height: 1.4;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .pub-date {
     font-size: 10px;
     color: dimgray;
