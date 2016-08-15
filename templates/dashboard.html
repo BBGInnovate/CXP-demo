@@ -202,6 +202,7 @@
                    <!-- <p class="label label-default translate-button translation-pending" ng-show="item.translation_requested === true">Translation Pending</p> -->
 
 
+                    <br ng-if="item.translatable">
                     <div class="dropdown translation-dropdown" ng-show="item.translatable">
                         <button class="btn btn-default dropdown-toggle translate-button-dropdown" type="button" id="dropdownMenu1" aria-haspopup="true" aria-expanded="true">
                             Translate
@@ -239,6 +240,7 @@
                         </div>
                     </p>
 
+                    <br ng-if="!item.media.audios">
 
                     <!--
                     <p human-translate class="label label-primary translate-button" ng-click="humanTranslate(columnIndex, $index)">
@@ -248,25 +250,37 @@
 
 
 
-                    <div class="social-media-buttons">
+                    <br>
+                    <div style="height: 30px; font-size: 22px">
 
-                        <a fb-share class="share-buttons">
-                            <i class="fa fa-facebook-square share-song-fb"></i>
-                        </a>
+                        <div class="col-md-3">
+                            <a fb-share class="share-buttons">
+                                <i class="fa fa-facebook-square share-song-fb"></i>
+                            </a>
+                        </div>
 
-                        <a href="http://twitter.com/share?url={{ item.object_name }}&text={{ item.title }}" target="_blank" class="share-buttons">
-                            <i class="fa fa-twitter"></i>
-                        </a>
+                        <div class="col-md-3">
+                            <a href="http://twitter.com/share?url={{ item.object_name }}&text={{ item.title }}" target="_blank" class="share-buttons">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </div>
 
-                        <a href="https://plus.google.com/share?url={{ item.object_name }}" target="_blank" class="share-buttons">
-                            <i class="fa fa-google-plus"></i>
-                        </a>
 
-                        <a href="mailto: your@email.com?subject={{ item.title }}&body={{ item.object_name }}" class="share-buttons">
-                            <i class="fa fa-envelope-o"></i>
-                        </a>
+                        <div class="col-md-3">
+                            <a href="https://plus.google.com/share?url={{ item.object_name }}" target="_blank" class="share-buttons">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <a href="mailto: your@email.com?subject={{ item.title }}&body={{ item.object_name }}" class="share-buttons">
+                                <i class="fa fa-envelope-o"></i>
+                            </a>
+                        </div>
 
                     </div>
+
                     <hr>
                 </div>
                 <a ng-hide="loading[$index]" class="get-more-link" ng-click="getMore($index, col.pageNum)" href="">Get More...</a>
